@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title> Тестовая страница  </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+</head>
+<body>
+<h1> хуй </h1>
+<form action="" method="post"></form>
+<button class="async" onclick="Async()">Ассинхронное</button>
+<button class="sync" onclick="ajaxload()" >Синхронное</button>
+<h2 id="ssync">qwq</h2>
+<script>
+    function Async() {
+console.log("Прив Асинхрон")
+}
+    function Sync() {
+console.log("Прив Синхрон")
+}
+<!--function sendAjaxForm() {-->
+<!--            $.ajax({-->
+<!--                url: '/sync',-->
+<!--                type: 'GET',-->
+<!--                success: function (response) {-->
+<!--                    var json = jQuery.parseJSON(response);-->
+<!--                    console.log(json);-->
+<!--&lt;!&ndash;                    $("#sync").load("json");&ndash;&gt;-->
+<!--                },-->
+<!--                error: function (error) {-->
+<!--                    console.log(error);-->
+<!--                }-->
+<!--            });-->
+<!--        }-->
+function ajaxload(){
+            var xhr=new XMLHttpRequest();
+            xhr.onreadystatechange=function(){
+                if(this.readyState==4){
+                    if(this.status >=200 && xhr.status < 300){
+                        document.getElementById('ssync').innerHTML=this.responseText;
+                    }
+                }
+            }
+            xhr.open('GET', '/sync');
+            xhr.send();
+        }
+</script>
+</body>
+</html>
